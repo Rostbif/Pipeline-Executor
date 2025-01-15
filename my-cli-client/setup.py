@@ -8,6 +8,7 @@ setup(
     install_requires=[
         "click==8.0.3",
         "setuptools",
+        "requests==2.26.0",
     ],
     entry_points={
         "console_scripts": [

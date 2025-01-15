@@ -1,29 +1,34 @@
 import click
-from cli import create_pipeline, execute_pipeline
+import cli.api_client as api_client
 
 @click.command()
 def cli():
     """Main entry point for the CLI."""
     click.echo("Hello user, please choose what you want to do:")
     click.echo("1. Create a pipeline")
-    click.echo("2. Run an existing pipeline")
-    choice = click.prompt("Enter your choice as number (1/2)", type=int)
+    click.echo("2. Get the details of existing pipeline")
+    click.echo("3. Get all pipelines")
+    click.echo("4. test the communication to the server")
+    choice = click.prompt("Enter your choice as number (1/2/3)", type=int)
 
     if choice == 1:
-        create_pipeline()
+        name = click.prompt("Enter the pipeline name")
+        description = click.prompt("Enter the pipeline description")
+        result = api_client.create_pipeline(name, description)
+        click.echo(f"{result["message"]} with id: {result["data"]}")
     elif choice == 2:
-        execute_pipeline()
+        pipeline_id = click.prompt("Enter the pipeline ID", type=int)
+        result = api_client.get_pipeline(pipeline_id)
+        click.echo(f"Success: {result["data"]}")
+    elif choice == 3:
+        result = api_client.get_pipelines()
+        click.echo(f"Success: {result["data"]}")
+    elif choice == 4:
+         result = api_client.test_connection()
+         click.echo(f"Success: {result["message"]}")
     else:
         click.echo("Invalid choice. Please enter 1 or 2.")
 
-# Register the commands with the CLI group
-def create_pipeline():
-        """Commad to create a new pipeline."""
-        click.echo("Creating a pipeline...")
-
-def execute_pipeline():
-    """Command to execute a pipeline."""
-    click.echo("Executing a pipeline...")
 
 if __name__ == "__main__":
     cli()
