@@ -1,6 +1,7 @@
 from fastapi import FastAPI
 import logging
 from app.routes import pipeline
+import google.generativeai as genai
 # from app.db.database import engine
 # from app.models import pipeline as pipeline_model
 
@@ -14,6 +15,11 @@ logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
 
 app = FastAPI()
+
+# genai.configure(api_key="AIzaSyBRQk9LSpqhLLnwu_nDlOIzXJxjLQReSwg")
+# model = genai.GenerativeModel("gemini-1.5-flash")
+# response = model.generate_content("Explain how AI works")
+# print(response.text)
 
 app.include_router(pipeline.router)
 

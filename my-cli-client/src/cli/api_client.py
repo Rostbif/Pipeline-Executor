@@ -10,9 +10,9 @@ def test_connection():
     if response.status_code == 200:
         return{"success": True, "message": response.json()}
 
-def create_pipeline(name, description):
+def create_pipeline(name, description, data):
     """Function to create a new pipeline."""
-    response = requests.post(f"{API_URL}/pipelines/", json={"name": name, "description": description})
+    response = requests.post(f"{API_URL}/pipelines/", json={"name": name, "description": description, "data":data})
     if response.status_code == 200:
         return {"success": True, "message": "Pipeline created successfully!", "data": response.json()}
     else:

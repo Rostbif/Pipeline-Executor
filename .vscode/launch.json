@@ -1,0 +1,28 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "Python: Uvicorn (API)",
+      "type": "python",
+      "request": "launch",
+      "module": "uvicorn",
+      "args": ["app.main:app", "--reload"],
+      "jinja": true,
+      "justMyCode": true,
+      "cwd": "${workspaceFolder}/api"
+    },
+    {
+      "name": "Python: CLI Client",
+      "type": "python",
+      "request": "launch",
+      "program": "${workspaceFolder}/my-cli-client/src/main.py",
+      "console": "integratedTerminal"
+    }
+  ],
+  "compounds": [
+    {
+      "name": "Run API and CLI Client",
+      "configurations": ["Python: Uvicorn (API)", "Python: CLI Client"]
+    }
+  ]
+}
